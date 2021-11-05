@@ -1,0 +1,6 @@
+# Proyecto-MFP-Back
+
+- Curso: Métodos Formales de Pruebas
+- Integrantes:
+	1. 1...
+	2. 2...
