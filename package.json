@@ -1,0 +1,29 @@
+{
+  "name": "proyecto-mfp-back",
+  "version": "1.0.0",
+  "description": "Homy, app de reservas de inmuebles",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MFP-2021-II/Proyecto-MFP-Back.git"
+  },
+  "author": "Railly Hugo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MFP-2021-II/Proyecto-MFP-Back/issues"
+  },
+  "homepage": "https://github.com/MFP-2021-II/Proyecto-MFP-Back#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.14",
+    "prettier": "^2.4.1"
+  }
+}
