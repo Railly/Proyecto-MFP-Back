@@ -1,7 +1,7 @@
 const db = require("../models")
 const User = db.User
 
-class UserController {
+class UserService {
   register(req, res) {
     User.create({
       firstName: req.body.firstName,
@@ -23,31 +23,30 @@ class UserController {
       })
   }
 
-  login(req, res) {
-    User.findOne({
-      where: {
-        email: req.body.email,
-        password: req.body.password,
-      },
-    })
-      .then((user) => {
-        console.log(user, "user")
-        if (!user) {
-          res.status(401).json({
-            message: "Invalid email or password!",
-          })
-        } else {
-          res.status(200).json({
-            message: "Login successful!",
-            user,
-          })
-        }
+  async login(req, res) {
+    try {
+      const user = await User.findOne({
+        where: {
+          email: req.body.email,
+          password: req.body.password,
+        },
       })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "Some error occurred while logging in.",
+      // console.log(user, "user")
+      if (!user) {
+        res.status(401).json({
+          message: "Invalid email or password!",
         })
+      } else {
+        res.status(200).json({
+          message: "Login successful!",
+          user,
+        })
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: error.message || "Some error occurred while logging in.",
       })
+    }
   }
 
   updateAccount(req, res) {
@@ -100,9 +99,9 @@ class UserController {
       })
   }
 }
-const userController = new UserController()
+const userService = new UserService()
 
-module.exports = userController
+module.exports = userService
 
 // // Create a new user
 // exports.create = (req, res) => {

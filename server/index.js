@@ -1,5 +1,10 @@
 const express = require("express")
 const cors = require("cors")
+const {
+  logError,
+  boomErrorHandler,
+  errorHandler,
+} = require("../middlewares/error.handler")
 
 class Server {
   constructor() {
@@ -8,6 +13,13 @@ class Server {
     this.app.use(express.json())
     this.app.use(cors())
     this.routes()
+    this.middleware()
+  }
+
+  middleware() {
+    this.app.use(logError)
+    this.app.use(boomErrorHandler)
+    this.app.use(errorHandler)
   }
 
   routes() {
