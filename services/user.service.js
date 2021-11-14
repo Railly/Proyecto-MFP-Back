@@ -1,10 +1,13 @@
+require("dotenv").config()
 const boom = require("@hapi/boom")
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
 const db = require("../models")
 const User = db.User
 
 class UserService {
   async register(data) {
-    const user = await User.create(data)
+    const user = await User.create({ ...data })
     return user
   }
 
@@ -12,13 +15,26 @@ class UserService {
     const user = await User.findOne({
       where: {
         correo: data.correo,
-        contraseña: data.contraseña,
       },
     })
-    if (!user) {
+
+    const passwordIsValid =
+      user === null
+        ? false
+        : await bcrypt.compare(data.contraseña, user.contraseña)
+
+    if (!user || !passwordIsValid) {
       throw boom.notFound("Ususario o contraseña incorrectos")
     }
-    return user
+
+    const token = jwt.sign(
+      { id: user.id, correo: user.correo },
+      process.env.JWT_SECRET
+    )
+
+    return {
+      token,
+    }
   }
 
   async findOne(id) {

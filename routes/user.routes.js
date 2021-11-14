@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const bcrypt = require("bcrypt")
 const validatorHandler = require("../middlewares/validator.handler")
 const {
   getUserSchema,
@@ -14,15 +15,15 @@ router.post(
   "/login",
   validatorHandler(loginUserSchema, BODY),
   async (req, res) => {
-    const user = await UserService.login(req.body)
+    const { user, token } = await UserService.login(req.body)
     if (!user) {
       res.status(401).json({
         message: "El correo o la contraseña son incorrectos",
       })
     } else {
       res.status(200).json({
+        token,
         message: "Has iniciado sesión correctamente",
-        user,
       })
     }
   }
@@ -32,8 +33,15 @@ router.post(
   "/register",
   validatorHandler(createUserSchema, BODY),
   async (req, res, next) => {
+    const { contraseña } = req.body
+    const saltRounds = 10
+    const contraseñaHash = await bcrypt.hash(contraseña, saltRounds)
+
     try {
-      const user = await UserService.register(req.body)
+      const user = await UserService.register({
+        ...req.body,
+        contraseña: contraseñaHash,
+      })
       res.status(201).json({
         message: "El usuario se ha creado correctamente!",
         user,
