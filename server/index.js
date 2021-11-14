@@ -4,6 +4,7 @@ const {
   logError,
   boomErrorHandler,
   errorHandler,
+  ormErrorHandler,
 } = require("../middlewares/error.handler")
 
 class Server {
@@ -18,6 +19,7 @@ class Server {
 
   middleware() {
     this.app.use(logError)
+    this.app.use(ormErrorHandler)
     this.app.use(boomErrorHandler)
     this.app.use(errorHandler)
   }

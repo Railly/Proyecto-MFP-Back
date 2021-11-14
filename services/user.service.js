@@ -1,217 +1,47 @@
+const boom = require("@hapi/boom")
 const db = require("../models")
 const User = db.User
 
 class UserService {
-  register(req, res) {
-    User.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-    })
-      .then((user) => {
-        res.status(201).json({
-          message: "User created successfully!",
-          user,
-        })
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the User.",
-        })
-      })
+  async register(data) {
+    const user = await User.create(data)
+    return user
   }
 
-  async login(req, res) {
-    try {
-      const user = await User.findOne({
-        where: {
-          email: req.body.email,
-          password: req.body.password,
-        },
-      })
-      // console.log(user, "user")
-      if (!user) {
-        res.status(401).json({
-          message: "Invalid email or password!",
-        })
-      } else {
-        res.status(200).json({
-          message: "Login successful!",
-          user,
-        })
-      }
-    } catch (error) {
-      res.status(500).send({
-        message: error.message || "Some error occurred while logging in.",
-      })
+  async login(data) {
+    const user = await User.findOne({
+      where: {
+        correo: data.correo,
+        contraseña: data.contraseña,
+      },
+    })
+    if (!user) {
+      throw boom.notFound("Ususario o contraseña incorrectos")
     }
+    return user
   }
 
-  updateAccount(req, res) {
-    User.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((num) => {
-        if (+num === 1) {
-          res.status(200).json({
-            message: "User updated successfully!",
-          })
-        } else {
-          res.status(404).json({
-            message: `User not found!`,
-          })
-        }
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while updating the User.",
-        })
-      })
+  async findOne(id) {
+    const user = await User.findByPk(id)
+    if (!user) {
+      throw boom.notFound("Usuario no encontrado")
+    }
+    return user
   }
 
-  deleteAccount(req, res) {
-    User.destroy({
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((num) => {
-        if (+num === 1) {
-          res.status(200).json({
-            message: "User deleted successfully!",
-          })
-        } else {
-          res.status(404).json({
-            message: `User not found!`,
-          })
-        }
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while deleting the User.",
-        })
-      })
+  async updateAccount(id, data) {
+    const user = await this.findOne(id)
+    const res = await user.update(data)
+    return res
+  }
+
+  async deleteAccount(id) {
+    const user = await this.findOne(id)
+    await user.destroy()
+    return { id }
   }
 }
+
 const userService = new UserService()
 
 module.exports = userService
-
-// // Create a new user
-// exports.create = (req, res) => {
-//   // Validate requesjt
-//   if (
-//     !req.body.firstName ||
-//     !req.body.lastName ||
-//     !req.body.email ||
-//     !req.body.password
-//   ) {
-//     res.status(400).send({
-//       message: "All user fields are required",
-//     })
-//   }
-//   // Create a User
-//   const user = {
-//     firstName: req.body.firstName,
-//     lastName: req.body.lastName,
-//     email: req.body.email,
-//     password: req.body.password,
-//   }
-
-//   User.create(user)
-//     .then((data) => {
-//       res.status(201).json({
-//         message: "User created successfully!",
-//         data,
-//       })
-//     })
-//     .catch((err) => {
-//       res.status(500).send({
-//         message: err.message || "Some error occurred while creating the User.",
-//       })
-//     })
-// }
-
-// // Retrieve all Users
-// exports.findAll = (req, res) => {
-//   // const email = req.query.email
-//   // const condition = email ? { email: { [Op.like]: `%${email}%` } } : null
-//   // User.findAll({ where: condition })
-
-//   User.findAll()
-//     .then((data) => {
-//       res.json({
-//         message: "Users retrieved successfully!",
-//         data,
-//       })
-//     })
-//     .catch((err) => {
-//       console.log(err.message)
-//       res.status(500).send({
-//         message: err.message || "Some error occurred while retrieving users.",
-//       })
-//     })
-// }
-
-// // Find a single User by id
-// exports.findOne = (req, res) => {
-//   const { id } = req.params
-
-//   User.findByPk(id)
-//     .then((data) => {
-//       res.json({
-//         message: "User retrieved successfully!",
-//         data,
-//       })
-//     })
-//     .catch((err) => {
-//       console.log(err.message)
-//       res.status(500).send({
-//         message: err.message || `Error retrieving User with id=${id}`,
-//       })
-//     })
-// }
-
-// // Update a User by id
-// exports.update = (req, res) => {
-//   const { id } = req.params
-
-//   User.update(req.body, {
-//     where: { id },
-//   }).then((num) => {
-//     if (+num === 1) {
-//       res.json({
-//         message: `User updated successfully!`,
-//       })
-//     } else {
-//       res.send({
-//         message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`,
-//       })
-//     }
-//   })
-// }
-
-// // Delete a User by id
-// exports.delete = (req, res) => {
-//   const { id } = req.params
-
-//   User.destroy({
-//     where: { id },
-//   }).then((num) => {
-//     if (+num === 1) {
-//       res.json({
-//         message: `User deleted successfully!`,
-//       })
-//     } else {
-//       res.send({
-//         message: `Cannot delete User with id=${id}. Maybe User was not found or req.body is empty!`,
-//       })
-//     }
-//   })
-// }
