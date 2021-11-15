@@ -7,7 +7,7 @@ const correo = joi.string().email()
 const contraseña = joi.string().min(8).max(45)
 
 // Optional fields
-const fechaNacimiento = joi.date().timestamp()
+const fechaNacimiento = joi.date()
 const direccion = joi.string().min(3).max(45)
 const imagen = joi.binary().encoding("base64")
 const DNI = joi.string().min(8).max(10)
@@ -26,7 +26,7 @@ const updateUserSchema = joi.object({
   apellidos: apellidos,
   correo: correo,
   contraseña: contraseña,
-  fechaNacimiento: fechaNacimiento,
+  fecha_nacimiento: fechaNacimiento,
   direccion: direccion,
   imagen: imagen,
   DNI: DNI,

@@ -3,11 +3,12 @@ const boom = require("@hapi/boom")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const db = require("../models")
-const User = db.User
+const User = db.H_Usuarios
 
 class UserService {
   async register(data) {
-    const user = await User.create({ ...data })
+    console.log(User)
+    const user = await User.create(data)
     return user
   }
 
@@ -33,6 +34,7 @@ class UserService {
     )
 
     return {
+      user,
       token,
     }
   }
