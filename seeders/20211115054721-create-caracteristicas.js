@@ -23,17 +23,17 @@ module.exports = {
         {
           descripcion: "Estacionamientos",
           cantidad: 1,
-          id_alojamiento: 1,
+          id_alojamiento: 2,
         },
         {
           descripcion: "Piscina",
           cantidad: 1,
-          id_alojamiento: 1,
+          id_alojamiento: 2,
         },
         {
           descripcion: "Jacuzzi",
           cantidad: 1,
-          id_alojamiento: 1,
+          id_alojamiento: 2,
         },
       ],
       {}

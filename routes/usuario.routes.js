@@ -24,6 +24,7 @@ router.post(
     } else {
       res.status(200).json({
         token,
+        data: user,
         message: "Has iniciado sesión correctamente",
       })
     }
