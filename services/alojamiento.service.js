@@ -5,7 +5,14 @@ const Accommodation = db.H_Alojamientos
 class AccommodationService {
   async getAll() {
     const accommodations = await Accommodation.findAll({
-      include: ["usuario"],
+      include: [
+        {
+          association: "usuario",
+          attributes: ["id", "nombre", "apellidos"],
+        },
+        "caracteristica",
+        "tipo_alojamiento",
+      ],
     })
     return accommodations
   }
@@ -16,6 +23,19 @@ class AccommodationService {
       throw boom.badRequest("Accommodation not created")
     }
     return newAccommodation
+  }
+
+  async getById(id) {
+    const accommodation = await Accommodation.findOne({
+      where: {
+        id,
+      },
+      include: ["usuario"],
+    })
+    if (!accommodation) {
+      throw boom.notFound("Accommodation not found")
+    }
+    return accommodation
   }
 }
 

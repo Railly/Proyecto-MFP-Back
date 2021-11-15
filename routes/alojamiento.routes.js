@@ -1,33 +1,21 @@
-require("dotenv").config()
-const jwt = require("jsonwebtoken")
-const boom = require("@hapi/boom")
 const router = require("express").Router()
 const validatorHandler = require("../middlewares/validator.handler")
 const { createAccommodationSchema } = require("../schemas/alojamiento.schema")
-const { BODY, PARAMS } = require("../utils/constants")
+const { BODY } = require("../utils/constants")
 const AccommodationService = require("../services/alojamiento.service")
+const validateJWT = require("../middlewares/validateJWT.handler")
 
 // User Routes
 router.post(
   "/",
   validatorHandler(createAccommodationSchema, BODY),
+  validateJWT,
   async (req, res) => {
-    const authorization = req.get("authorization")
-    const token = authorization && authorization.split(" ")[1]
-    console.log(token)
-    let decodedToken = null
-    try {
-      decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-    } catch (err) {
-      res.status(401).send({
-        error: "Token inválido",
-      })
-    }
-    const { id } = decodedToken
+    const { user } = req
 
     const accommodation = await AccommodationService.create({
       ...req.body,
-      id_usuario: id,
+      id_usuario: user.id,
     })
 
     if (!accommodation) {
@@ -43,5 +31,15 @@ router.post(
     })
   }
 )
+
+router.get("/", async (req, res) => {
+  const accommodations = await AccommodationService.getAll()
+  res.status(200).json({
+    message: "Los alojamientos se han obtenido exitosamente",
+    data: {
+      alojamientos: accommodations,
+    },
+  })
+})
 
 module.exports = router
