@@ -4,7 +4,9 @@ const ImgsAnnouncement = db.H_Imagenes_para_Anuncios
 
 class ImgsAnnouncementService {
   async create(data) {
+    console.log(data, "data")
     const res = await ImgsAnnouncement.create(data)
+    console.log(res, "res")
     if (!res) {
       throw boom.badRequest("Accommodation not created")
     }

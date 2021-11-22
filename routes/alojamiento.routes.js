@@ -15,7 +15,6 @@ router.post(
   validateJWT,
   async (req, res) => {
     const { user } = req
-    console.log(req.body)
 
     const accommodation = await AccommodationService.create({
       ...req.body.alojamiento,
@@ -41,7 +40,7 @@ router.post(
     const { id: anuncioId } = announcement
 
     const img = ImgsAnnouncementService.create({
-      ...req.body.imagen,
+      imagen: req.body.imagen,
       id_anuncio: anuncioId,
     })
 
