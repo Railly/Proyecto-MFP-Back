@@ -5,11 +5,11 @@ const Features = db.H_Caracteristicas
 
 class FeaturesService {
   async create(data) {
-    const feature = await Features.create(data)
-    if (!feature) {
-      throw boom.badRequest("Error al crear la caracteristica")
+    const features = await Features.bulkCreate(data)
+    if (!features) {
+      throw boom.badRequest("Error al crear las caracteristicas")
     }
-    return feature
+    return features
   }
 }
 

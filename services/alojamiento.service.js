@@ -18,6 +18,7 @@ class AccommodationService {
   }
 
   async create(accommodation) {
+    console.log(accommodation, "acc")
     const newAccommodation = await Accommodation.create(accommodation)
     if (!newAccommodation) {
       throw boom.badRequest("Accommodation not created")
