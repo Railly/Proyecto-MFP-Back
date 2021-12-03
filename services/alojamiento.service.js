@@ -25,7 +25,15 @@ class AccommodationService {
       where: {
         id,
       },
-      include: ["usuario"],
+      include: [
+        {
+          association: "usuario",
+          attributes: ["id", "nombre", "apellidos"],
+        },
+        "caracteristica",
+        "tipo_alojamiento",
+        "anuncio",
+      ],
     })
   }
 }

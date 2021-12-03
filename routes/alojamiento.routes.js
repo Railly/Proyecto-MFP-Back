@@ -62,12 +62,23 @@ router.post(
   }
 )
 
-router.get("/", async (req, res) => {
+router.get("/", validateJWT, async (req, res) => {
   const accommodations = await AccommodationService.getAll()
   res.status(200).json({
     message: "Los alojamientos se han obtenido exitosamente",
     data: {
       alojamientos: accommodations,
+    },
+  })
+})
+
+router.get("/:id", validateJWT, async (req, res) => {
+  const { id } = req.params
+  const accommodation = await AccommodationService.getById(id)
+  res.status(200).json({
+    message: "El alojamiento se ha obtenido exitosamente",
+    data: {
+      alojamientos: accommodation,
     },
   })
 })

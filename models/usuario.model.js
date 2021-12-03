@@ -8,6 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         as: "usuario",
         foreignKey: "id_usuario",
       })
+      this.belongsToMany(models.H_Anuncios, {
+        as: "favoritos",
+        through: "H_Usuarios_Anuncios",
+        foreignKey: "id_usuario",
+        otherKey: "id_anuncio",
+      })
     }
   }
   Usuario.init(
