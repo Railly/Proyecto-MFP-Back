@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Homy, app de reservas de inmuebles",
   "main": "index.js",
+  "jestSonar": {
+    "reportPath": "reports",
+    "reportFile": "test-reporter.xml",
+    "indent": 2
+  },
   "scripts": {
     "dev": "nodemon -r dotenv/config app.js",
     "db:create": "sequelize-cli db:create",
@@ -11,8 +16,13 @@
     "db:seeds": "sequelize-cli db:seed:all",
     "db:g:seed": "sequelize-cli seed:generate --name",
     "db:drop": "sequelize-cli db:drop",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node app.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sonarqube": "sonar-scanner",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+    "pretest": "cross-env NODE_ENV=test npm run db:reset",
+    "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create"
   },
   "repository": {
     "type": "git",
@@ -37,6 +47,7 @@
     "sequelize": "^6.9.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
@@ -45,8 +56,11 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.1.1",
+    "jest": "^27.4.0",
+    "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
-    "sequelize-cli": "^6.3.0"
+    "sequelize-cli": "^6.3.0",
+    "sonar-scanner": "^3.1.0"
   }
 }

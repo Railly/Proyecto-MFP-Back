@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\models\index.test.js">
+    <testCase name="index.js" duration="148"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\services\alojamiento.service.test.js">
+    <testCase name="create" duration="158"/>
+    <testCase name="getById" duration="11"/>
+    <testCase name="getAll" duration="6"/>
+  </file>
+</testExecutions>

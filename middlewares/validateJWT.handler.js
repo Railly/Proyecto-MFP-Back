@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken")
 
 function validateJWT(req, res, next) {
   const token = req.get("Authorization")
-  console.log(token)
   if (token && token.startsWith("Bearer ")) {
     const jwtToken = token.slice(7, token.length)
     try {

@@ -16,7 +16,6 @@ router.post(
   validatorHandler(loginUserSchema, BODY),
   async (req, res) => {
     const { user, token } = await UserService.login(req.body)
-    console.log(user)
     if (!user) {
       res.status(401).json({
         message: "El correo o la contraseña son incorrectos",

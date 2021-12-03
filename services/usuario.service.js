@@ -7,9 +7,7 @@ const User = db.H_Usuarios
 
 class UserService {
   async register(data) {
-    console.log(User)
-    const user = await User.create(data)
-    return user
+    return User.create(data)
   }
 
   async login(data) {
@@ -49,8 +47,7 @@ class UserService {
 
   async updateAccount(id, data) {
     const user = await this.findOne(id)
-    const res = await user.update(data)
-    return res
+    return user.update(data)
   }
 
   async deleteAccount(id) {

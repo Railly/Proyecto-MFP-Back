@@ -17,3 +17,9 @@ node_modules/
 .env
 .env.test
 .env.production
+
+# SonarQube
+.scannerwork
+
+# Jest
+coverage

@@ -3,23 +3,20 @@ const Announcement = db.H_Anuncios
 
 class AnnouncementService {
   async getAll() {
-    const announcement = await Announcement.findAll({
+    return Announcement.findAll({
       include: ["alojamiento", "imagen"],
     })
-    return announcement
   }
 
   async create(announcement) {
-    const newAnnouncement = await Announcement.create(announcement)
-    return newAnnouncement
+    return Announcement.create(announcement)
   }
 
   async getAllById(id) {
-    const announcement = await Announcement.findAll({
+    return Announcement.findAll({
       where: { id_usuario: id },
       include: ["alojamiento", "imagen"],
     })
-    return announcement
   }
 }
 

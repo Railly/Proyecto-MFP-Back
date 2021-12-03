@@ -12,8 +12,7 @@ class ImgsAnnouncementService {
   }
 
   async getAll() {
-    const res = await ImgsAnnouncement.findAll()
-    return res
+    return ImgsAnnouncement.findAll()
   }
 }
 
