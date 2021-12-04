@@ -13,8 +13,6 @@ router.post(
   async (req, res) => {
     const { user } = req
     const { id_anuncio } = req.body
-    console.log(user, "user")
-    console.log(id_anuncio, "id_anuncio")
     try {
       const favorite = await favoritesService.add({
         id_usuario: user.id,
@@ -38,7 +36,7 @@ router.get("/", validateJWT, async (req, res) => {
   try {
     const userFavorites = await favoritesService.getByUser(user.id)
     res.status(200).send({
-      message: "Lista de favoritos",
+      message: "Se han obtenido los anuncios favoritos",
       data: userFavorites.favoritos,
     })
   } catch (error) {

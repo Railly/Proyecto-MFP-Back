@@ -20,7 +20,7 @@
     "start": "node app.js",
     "lint": "eslint",
     "sonarqube": "sonar-scanner",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+    "test": "cross-env NODE_ENV=test jest",
     "pretest": "cross-env NODE_ENV=test npm run db:reset",
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create"
   },
@@ -61,6 +61,7 @@
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
     "sequelize-cli": "^6.3.0",
-    "sonar-scanner": "^3.1.0"
+    "sonar-scanner": "^3.1.0",
+    "supertest": "^6.1.6"
   }
 }
