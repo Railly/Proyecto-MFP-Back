@@ -53,7 +53,6 @@ router.post(
     } catch (err) {
       res.status(404).json({
         message: "El usuario no se ha podido crear",
-        message: err.message,
       })
     }
   }
@@ -75,7 +74,6 @@ router.put(
     } catch (err) {
       res.status(404).json({
         message: "El usuario no se ha podido actualizar",
-        message: err.message,
       })
     }
   }
@@ -96,7 +94,6 @@ router.delete(
     } catch (err) {
       res.status(404).json({
         message: "El usuario no se ha podido eliminar",
-        message: err.message,
       })
     }
   }
