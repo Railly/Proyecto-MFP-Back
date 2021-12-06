@@ -12,14 +12,7 @@ router.post(
   validateJWT,
   async (req, res) => {
     const announcement = await AnnouncementService.create(req.body)
-
-    if (!announcement) {
-      return res.status(400).send({
-        error: "Error al crear el anuncio",
-      })
-    }
-
-    return res.status(201).send({
+    return res.status(200).send({
       data: announcement,
     })
   }

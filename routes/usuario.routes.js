@@ -15,16 +15,17 @@ router.post(
   "/login",
   validatorHandler(loginUserSchema, BODY),
   async (req, res) => {
-    const { user, token } = await UserService.login(req.body)
-    if (!user) {
-      res.status(401).json({
-        message: "El correo o la contraseña son incorrectos",
-      })
-    } else {
+    try {
+      const { user, token } = await UserService.login(req.body)
       res.status(200).json({
         token,
         data: user,
         message: "Has iniciado sesión correctamente",
+      })
+    } catch (error) {
+      res.status(404).json({
+        error: "Usuario o contraseña incorrectos",
+        message: error.message,
       })
     }
   }
@@ -33,7 +34,7 @@ router.post(
 router.post(
   "/registro",
   validatorHandler(createUserSchema, BODY),
-  async (req, res, next) => {
+  async (req, res) => {
     const { contraseña } = req.body
     const saltRounds = 10
     const contraseñaHash = await bcrypt.hash(contraseña, saltRounds)
@@ -43,14 +44,17 @@ router.post(
         ...req.body,
         contraseña: contraseñaHash,
       })
-      res.status(201).json({
+      res.status(200).json({
         message: "El usuario se ha creado correctamente!",
         data: {
           usuario: user,
         },
       })
     } catch (err) {
-      next(err)
+      res.status(404).json({
+        message: "El usuario no se ha podido crear",
+        message: err.message,
+      })
     }
   }
 )
@@ -59,7 +63,7 @@ router.put(
   "/:id",
   validatorHandler(getUserSchema, PARAMS),
   validatorHandler(updateUserSchema, BODY),
-  async (req, res, next) => {
+  async (req, res) => {
     try {
       const user = await UserService.updateAccount(req.params.id, req.body)
       res.status(200).json({
@@ -69,7 +73,10 @@ router.put(
         },
       })
     } catch (err) {
-      next(err)
+      res.status(404).json({
+        message: "El usuario no se ha podido actualizar",
+        message: err.message,
+      })
     }
   }
 )
@@ -77,7 +84,7 @@ router.put(
 router.delete(
   "/:id",
   validatorHandler(getUserSchema, PARAMS),
-  async (req, res, next) => {
+  async (req, res) => {
     try {
       const user = await UserService.deleteAccount(req.params.id)
       res.status(200).json({
@@ -87,7 +94,10 @@ router.delete(
         },
       })
     } catch (err) {
-      next(err)
+      res.status(404).json({
+        message: "El usuario no se ha podido eliminar",
+        message: err.message,
+      })
     }
   }
 )

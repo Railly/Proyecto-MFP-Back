@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\models\index.test.js">
-    <testCase name="index.js" duration="143"/>
+    <testCase name="index.js" duration="174"/>
   </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\services\alojamiento.service.test.js">
-    <testCase name="create" duration="157"/>
-    <testCase name="getById" duration="20"/>
-    <testCase name="getAll" duration="8"/>
+    <testCase name="create" duration="150"/>
+    <testCase name="getById" duration="23"/>
+    <testCase name="getAll" duration="10"/>
   </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\favoritos.routes.test.js">
-    <testCase name="Favoritos Routes should return status 200" duration="24"/>
+    <testCase name="Favoritos Routes Get route /favoritos with status 200" duration="28"/>
+    <testCase name="Favoritos Routes Post rout /favoritos with status 200" duration="29"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\tipo_alojamiento.routes.test.js">
+    <testCase name="Tipo alojamiento Routes Get route /tipo_alojamiento with status 200" duration="19"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\alojamiento.routes.test.js">
+    <testCase name="Alojamiento Routes Get route /alojamiento with status 200" duration="30"/>
+    <testCase name="Alojamiento Routes Get route /alojamiento/:id with status 200" duration="13"/>
+    <testCase name="Alojamiento Routes Post route /alojamiento with status 400" duration="30"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\anuncio.routes.test.js">
+    <testCase name="Anuncio Routes Post route /anuncio with status 200" duration="26"/>
+    <testCase name="Anuncio Routes Get route /anuncio with status 200" duration="35"/>
+    <testCase name="Anuncio Routes Get route /anuncio/:id with status 200" duration="18"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\caracteristicas.routes.test.js">
+    <testCase name="Caracteristicas Routes Post route /caracteristicas with status 200" duration="16"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\usuario.routes.test.js">
+    <testCase name="User Routes Post route /login with status 200" duration="502"/>
+    <testCase name="User Routes Post route /login with status 404" duration="74"/>
+    <testCase name="User Routes Post rout /registro with status 200" duration="87"/>
+    <testCase name="User Routes Post rout /registro with status 404" duration="69"/>
+    <testCase name="User Routes Put rout /usuarios/:id with status 200" duration="10"/>
+    <testCase name="User Routes Put rout /usuarios/:id with status 404" duration="5"/>
+    <testCase name="User Routes Delete rout /usuarios/:id with status 200" duration="10"/>
+    <testCase name="User Routes Delete rout /usuarios/:id with status 404" duration="5"/>
   </file>
 </testExecutions>

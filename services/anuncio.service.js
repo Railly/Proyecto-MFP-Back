@@ -14,7 +14,7 @@ class AnnouncementService {
 
   async getAllById(id) {
     return Announcement.findAll({
-      where: { id_usuario: id },
+      where: { id_alojamiento: id },
       include: ["alojamiento", "imagen"],
     })
   }

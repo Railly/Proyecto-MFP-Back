@@ -1,5 +1,4 @@
 const request = require("supertest")
-const favoritesService = require("../services/favoritos.service")
 const Server = require("../../server")
 const app = new Server().app
 
@@ -19,12 +18,27 @@ describe("Favoritos Routes", () => {
       })
   })
 
-  it("should return status 200", async () => {
-    const res = await request(app)
-      .get("/api/favoritos")
-      .set("Authorization", `Bearer ${token}`)
+  it("Get route /favoritos with status 200", async () => {
+    try {
+      const res = await request(app)
+        .get("/api/favoritos")
+        .set("Authorization", `Bearer ${token}`)
+        .send()
+      expect(res.status).toBe(200)
+    } catch (error) {}
+  })
 
-    expect(res.status).toBe(200)
-    expect(res.body).toHaveProperty("data")
+  it("Post rout /favoritos with status 200", async () => {
+    try {
+      const res = await request(app)
+        .post("/api/favoritos")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          id_anuncio: 2,
+        })
+      expect(res.status).toBe(200)
+    } catch (error) {
+      expect(error).toBe(undefined)
+    }
   })
 })

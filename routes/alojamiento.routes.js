@@ -44,13 +44,7 @@ router.post(
       id_anuncio: anuncioId,
     })
 
-    if (!accommodation) {
-      res.status(400).send({
-        error: "Hubo un error al crear el alojamiento",
-      })
-    }
-
-    res.status(201).json({
+    res.status(200).json({
       message: "Alojamiento creado exitosamente",
       data: {
         anuncio: announcement,

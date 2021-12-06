@@ -13,12 +13,8 @@ router.post(
   async (req, res) => {
     const { body: features } = req
     const createdFeatures = await FeaturesService.create(features)
-    if (!createdFeatures) {
-      return res.status(400).send({
-        error: "Error al crear las caracteristicas",
-      })
-    }
-    return res.status(201).send({
+
+    return res.status(200).send({
       message: "Caracteristicas creadas correctamente",
       data: {
         caracteristicas: createdFeatures,
