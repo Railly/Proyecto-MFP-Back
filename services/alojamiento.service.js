@@ -20,6 +20,14 @@ class AccommodationService {
     return Accommodation.create(accommodation)
   }
 
+  async delete(id) {
+    const accommodation = await Accommodation.findByPk(id)
+    if (!accommodation) {
+      throw boom.notFound("Accommodation not found")
+    }
+    return accommodation.destroy()
+  }
+
   async getById(id) {
     return Accommodation.findOne({
       where: {
@@ -32,7 +40,10 @@ class AccommodationService {
         },
         "caracteristica",
         "tipo_alojamiento",
-        "anuncio",
+        {
+          association: "anuncio",
+          include: ["imagen"],
+        },
       ],
     })
   }

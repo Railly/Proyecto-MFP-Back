@@ -51,7 +51,6 @@ class FavoritesService {
     if (!res) {
       throw boom.badRequest("Error al obtener favorito")
     }
-    console.log(res, "ressssssss")
     return res
   }
 }
