@@ -27,6 +27,33 @@ class FavoritesService {
     }
     return res
   }
+
+  async delete(data) {
+    const res = await Favorites.destroy({
+      where: {
+        id_usuario: data.id_usuario,
+        id_anuncio: data.id_anuncio,
+      },
+    })
+    if (!res) {
+      throw boom.badRequest("Error al eliminar favorito")
+    }
+    return res
+  }
+
+  async getById(data) {
+    const res = Favorites.findOne({
+      where: {
+        id_usuario: data.id_usuario,
+        id_anuncio: data.id_anuncio,
+      },
+    })
+    if (!res) {
+      throw boom.badRequest("Error al obtener favorito")
+    }
+    console.log(res, "ressssssss")
+    return res
+  }
 }
 
 const favoritesService = new FavoritesService()
