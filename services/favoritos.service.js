@@ -29,9 +29,8 @@ class FavoritesService {
   }
 
   async delete(data) {
-    const res = await Favorites.destroy({
+    const res = Favorites.destroy({
       where: {
-        id_usuario: data.id_usuario,
         id_anuncio: data.id_anuncio,
       },
     })

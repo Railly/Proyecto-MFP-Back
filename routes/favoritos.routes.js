@@ -59,7 +59,6 @@ router.delete("/", validateJWT, async (req, res) => {
       id_usuario: user.id,
       id_anuncio: id_anuncio,
     })
-
     res.status(200).send({
       message: "El anuncio se ha eliminado de favoritos",
       id_favorito: favorite,
