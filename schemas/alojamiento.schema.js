@@ -26,7 +26,7 @@ const createAccommodationSchema = joi.object({
       nombre: joi.string().required(),
     })
     .required(),
-  imagen: joi.string().required(),
+  imagen: joi.any().required(),
 })
 
 module.exports = {

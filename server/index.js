@@ -1,5 +1,7 @@
 const express = require("express")
 const cors = require("cors")
+const fileUpload = require("express-fileupload")
+
 const {
   logError,
   boomErrorHandler,
@@ -11,13 +13,19 @@ class Server {
   constructor() {
     this.port = process.env.PORT || 3000
     this.app = express()
-    this.app.use(express.json())
-    this.app.use(cors())
-    this.routes()
     this.middleware()
+    this.routes()
   }
 
   middleware() {
+    this.app.use(express.json())
+    this.app.use(cors())
+    this.app.use(express.urlencoded({ extended: false }))
+    this.app.use(
+      fileUpload({
+        limits: { fileSize: 50 * 1024 * 1024 },
+      })
+    )
     this.app.use(logError)
     this.app.use(ormErrorHandler)
     this.app.use(boomErrorHandler)
