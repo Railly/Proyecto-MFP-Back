@@ -12,8 +12,6 @@ const { cloudinaryImageUpload } = require("../utils/cloudinaryImageUpload")
 // User Routes
 router.post("/", validateJWT, async (req, res) => {
   const { user } = req
-  console.log(req.body, "req.bodyyyyyyyyyyyyyyyy")
-  console.log(req.files, "req.files")
   const imgUrl = await cloudinaryImageUpload(req.files.imagen)
   console.log(imgUrl, "imgUrl")
 
@@ -32,16 +30,12 @@ router.post("/", validateJWT, async (req, res) => {
       return {
         descripcion: req.body[`caracteristicas[${i}][descripcion]`],
         cantidad: req.body[`caracteristicas[${i}][cantidad]`],
+        id_alojamiento: alojamientoId,
       }
     }
   )
 
-  const caracteristicasArr = caracteristicas.map((caracteristica) => ({
-    ...caracteristica,
-    id_alojamiento: alojamientoId,
-  }))
-
-  const car = await FeaturesService.create(caracteristicasArr)
+  const car = await FeaturesService.create(caracteristicas)
 
   const announcement = await AnnouncementService.create({
     descripcion: req.body["anuncio[descripcion]"],
@@ -90,55 +84,79 @@ router.get("/:id", validateJWT, async (req, res) => {
   })
 })
 
-router.put(
-  "/:id",
-  validatorHandler(createAccommodationSchema, BODY),
-  validateJWT,
-  async (req, res) => {
-    const { id } = req.params
-    const { user } = req
-    // delete the accommodation
-    await AccommodationService.delete(id)
+router.put("/:id", validateJWT, async (req, res) => {
+  const { id } = req.params
+  console.log(req.body, "req.body")
 
-    const accommodation = await AccommodationService.create({
-      ...req.body.alojamiento,
-      id_usuario: user.id,
-    })
+  // update accommodation
+  await AccommodationService.update(id, {
+    direccion: req.body?.["alojamiento[direccion]"],
+    id_tipo_alojamiento: req.body?.["alojamiento[id_tipo_alojamiento]"],
+  })
 
-    const { id: alojamientoId } = accommodation
-
-    const caracteristicasArr = req.body.caracteristicas.map(
-      (caracteristica) => ({
-        ...caracteristica,
-        id_alojamiento: alojamientoId,
-      })
+  // update announcement
+  if (req.body["anuncio[id_anuncio]"]) {
+    const announcement = await AnnouncementService.update(
+      req.body?.["anuncio[id_anuncio]"],
+      {
+        descripcion: req.body?.["anuncio[descripcion]"],
+        nombre: req.body?.["anuncio[nombre]"],
+        precio: req.body?.["anuncio[precio]"],
+      }
     )
+  }
 
-    const car = await FeaturesService.create(caracteristicasArr)
+  // update features
 
-    const announcement = await AnnouncementService.create({
-      ...req.body.anuncio,
-      id_alojamiento: alojamientoId,
+  const caracteristicas = Array.from(
+    {
+      length: 6,
+    },
+    (v, i) => {
+      return {
+        descripcion: req.body[`caracteristicas[${i}][descripcion]`],
+        cantidad: req.body[`caracteristicas[${i}][cantidad]`],
+        id_caracteristica: req.body[`caracteristicas[${i}][id_caracteristica]`],
+      }
+    }
+  )
+
+  if (caracteristicas.length > 0) {
+    const mappedFeatures = caracteristicas.map(async (caracteristica) => {
+      if (caracteristica) {
+        const feat = {
+          descripcion: caracteristica.descripcion,
+          cantidad: caracteristica.cantidad,
+        }
+        if (caracteristica.id_caracteristica === "undefined") {
+          console.log("caracteristica.id_caracteristica", caracteristica)
+          if (caracteristica.descripcion || caracteristica.cantidad) {
+            console.log("WAAAAAAAAAAAAaa")
+            const newFeature = await FeaturesService.create([
+              { ...feat, id_alojamiento: id },
+            ])
+            return newFeature
+          }
+        } else {
+          return FeaturesService.update(caracteristica.id_caracteristica, feat)
+        }
+      }
     })
+    await Promise.all(mappedFeatures)
+  }
 
-    const { id: anuncioId } = announcement
-
-    const img = ImgsAnnouncementService.create({
-      imagen: req.body.imagen,
-      id_anuncio: anuncioId,
-    })
-
-    res.status(200).json({
-      message: "Alojamiento creado exitosamente",
-      data: {
-        anuncio: announcement,
-        alojamiento: accommodation,
-        caracteristicas: car,
-        imagen: img,
-      },
+  if (req.files?.imagen) {
+    const imgUrl = await cloudinaryImageUpload(req.files.imagen)
+    await ImgsAnnouncementService.update(req.body?.["anuncio[id_anuncio]"], {
+      imagen: imgUrl,
     })
   }
-)
+
+  res.status(200).json({
+    message: "El alojamiento se ha actualizado exitosamente",
+    ok: true,
+  })
+})
 
 router.delete("/:id", validateJWT, async (req, res) => {
   const { id } = req.params

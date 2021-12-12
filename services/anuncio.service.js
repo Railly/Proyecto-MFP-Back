@@ -18,6 +18,11 @@ class AnnouncementService {
       include: ["alojamiento", "imagen"],
     })
   }
+
+  async update(id, announcement) {
+    const announcementToUpdate = await Announcement.findByPk(id)
+    return announcementToUpdate.update(announcement)
+  }
 }
 
 const announcementService = new AnnouncementService()

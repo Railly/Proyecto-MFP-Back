@@ -11,6 +11,17 @@ class FeaturesService {
     }
     return features
   }
+
+  async update(id, data) {
+    console.log(id, "id")
+    console.log(data, "data")
+    const features = await Features.findByPk(id)
+    if (!features) {
+      throw boom.notFound("Caracteristicas no encontrada")
+    }
+    const updatedFeatures = await features.update(data)
+    return updatedFeatures
+  }
 }
 
 const featuresService = new FeaturesService()

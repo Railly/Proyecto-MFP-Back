@@ -14,6 +14,17 @@ class ImgsAnnouncementService {
   async getAll() {
     return ImgsAnnouncement.findAll()
   }
+  async update(id, data) {
+    const res = await ImgsAnnouncement.update(data, {
+      where: {
+        id: id,
+      },
+    })
+    if (!res) {
+      throw boom.badRequest("Accommodation not updated")
+    }
+    return res
+  }
 }
 
 const accommodationService = new ImgsAnnouncementService()

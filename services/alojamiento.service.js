@@ -47,6 +47,14 @@ class AccommodationService {
       ],
     })
   }
+
+  async update(id, accommodation) {
+    const accommodationToUpdate = await Accommodation.findByPk(id)
+    if (!accommodationToUpdate) {
+      throw boom.notFound("Accommodation not found")
+    }
+    return accommodationToUpdate.update(accommodation)
+  }
 }
 
 const accommodationService = new AccommodationService()
