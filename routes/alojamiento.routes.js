@@ -1,7 +1,5 @@
 const router = require("express").Router()
 const validatorHandler = require("../middlewares/validator.handler")
-const { createAccommodationSchema } = require("../schemas/alojamiento.schema")
-const { BODY } = require("../utils/constants")
 const AccommodationService = require("../services/alojamiento.service")
 const validateJWT = require("../middlewares/validateJWT.handler")
 const FeaturesService = require("../services/caracteristicas.service")
@@ -13,7 +11,6 @@ const { cloudinaryImageUpload } = require("../utils/cloudinaryImageUpload")
 router.post("/", validateJWT, async (req, res) => {
   const { user } = req
   const imgUrl = await cloudinaryImageUpload(req.files.imagen)
-  console.log(imgUrl, "imgUrl")
 
   const accommodation = await AccommodationService.create({
     direccion: req.body["alojamiento[direccion]"],
@@ -96,14 +93,11 @@ router.put("/:id", validateJWT, async (req, res) => {
 
   // update announcement
   if (req.body["anuncio[id_anuncio]"]) {
-    const announcement = await AnnouncementService.update(
-      req.body?.["anuncio[id_anuncio]"],
-      {
-        descripcion: req.body?.["anuncio[descripcion]"],
-        nombre: req.body?.["anuncio[nombre]"],
-        precio: req.body?.["anuncio[precio]"],
-      }
-    )
+    await AnnouncementService.update(req.body?.["anuncio[id_anuncio]"], {
+      descripcion: req.body?.["anuncio[descripcion]"],
+      nombre: req.body?.["anuncio[nombre]"],
+      precio: req.body?.["anuncio[precio]"],
+    })
   }
 
   // update features
@@ -129,9 +123,7 @@ router.put("/:id", validateJWT, async (req, res) => {
           cantidad: caracteristica.cantidad,
         }
         if (caracteristica.id_caracteristica === "undefined") {
-          console.log("caracteristica.id_caracteristica", caracteristica)
           if (caracteristica.descripcion || caracteristica.cantidad) {
-            console.log("WAAAAAAAAAAAAaa")
             const newFeature = await FeaturesService.create([
               { ...feat, id_alojamiento: id },
             ])
