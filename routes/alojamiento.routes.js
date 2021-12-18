@@ -83,15 +83,12 @@ router.get("/:id", validateJWT, async (req, res) => {
 
 router.put("/:id", validateJWT, async (req, res) => {
   const { id } = req.params
-  console.log(req.body, "req.body")
 
-  // update accommodation
   await AccommodationService.update(id, {
     direccion: req.body?.["alojamiento[direccion]"],
     id_tipo_alojamiento: req.body?.["alojamiento[id_tipo_alojamiento]"],
   })
 
-  // update announcement
   if (req.body["anuncio[id_anuncio]"]) {
     await AnnouncementService.update(req.body?.["anuncio[id_anuncio]"], {
       descripcion: req.body?.["anuncio[descripcion]"],
@@ -99,8 +96,6 @@ router.put("/:id", validateJWT, async (req, res) => {
       precio: req.body?.["anuncio[precio]"],
     })
   }
-
-  // update features
 
   const caracteristicas = Array.from(
     {
@@ -122,13 +117,11 @@ router.put("/:id", validateJWT, async (req, res) => {
           descripcion: caracteristica.descripcion,
           cantidad: caracteristica.cantidad,
         }
-        if (caracteristica.id_caracteristica === "undefined") {
-          if (caracteristica.descripcion || caracteristica.cantidad) {
-            const newFeature = await FeaturesService.create([
-              { ...feat, id_alojamiento: id },
-            ])
-            return newFeature
-          }
+        if (
+          caracteristica.id_caracteristica === "undefined" &&
+          (caracteristica.descripcion || caracteristica.cantidad)
+        ) {
+          return FeaturesService.create([{ ...feat, id_alojamiento: id }])
         } else {
           return FeaturesService.update(caracteristica.id_caracteristica, feat)
         }

@@ -41,4 +41,34 @@ describe("Favoritos Routes", () => {
       expect(error).toBe(undefined)
     }
   })
+
+  it("Get one route /favoritos/:id with status 200", async () => {
+    try {
+      const res = await request(app)
+        .get("/api/favoritos/1")
+        .set("Authorization", `Bearer ${token}`)
+        .send()
+      expect(res.status).toBe(200)
+    } catch (error) {}
+  })
+
+  it("Get one route /favoritos/:id with status 404", async () => {
+    const res = await request(app)
+      .get("/api/favoritos/1234879")
+      .set("Authorization", `Bearer ${token}`)
+      .send()
+    expect(res.status).toBe(404)
+  })
+
+  it("Delete route /favoritos with status 200", async () => {
+    try {
+      const res = await request(app)
+        .delete("/api/favoritos/")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          id_anuncio: 2,
+        })
+      expect(res.status).toBe(200)
+    } catch (error) {}
+  })
 })

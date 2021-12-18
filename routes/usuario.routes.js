@@ -52,7 +52,8 @@ router.post(
       })
     } catch (err) {
       res.status(404).json({
-        message: "El usuario no se ha podido crear",
+        error: "El usuario ya existe",
+        message: err.message,
       })
     }
   }

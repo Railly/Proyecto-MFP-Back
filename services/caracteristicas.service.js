@@ -17,8 +17,7 @@ class FeaturesService {
     if (!features) {
       throw boom.notFound("Caracteristicas no encontrada")
     }
-    const updatedFeatures = await features.update(data)
-    return updatedFeatures
+    return features.update(data)
   }
 }
 
