@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "imagen",
         foreignKey: "id_anuncio",
       })
+      this.hasMany(models.H_Comentarios, {
+        as: "comentarios",
+        foreignKey: "id_anuncio",
+      })
     }
   }
   Anuncios.init(

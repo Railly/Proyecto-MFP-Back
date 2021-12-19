@@ -4,7 +4,14 @@ const Announcement = db.H_Anuncios
 class AnnouncementService {
   async getAll() {
     return Announcement.findAll({
-      include: ["alojamiento", "imagen"],
+      include: [
+        "alojamiento",
+        "imagen",
+        {
+          association: "comentarios",
+          attributes: ["calificacion"],
+        },
+      ],
     })
   }
 
@@ -15,7 +22,7 @@ class AnnouncementService {
   async getAllById(id) {
     return Announcement.findAll({
       where: { id_alojamiento: id },
-      include: ["alojamiento", "imagen"],
+      include: ["alojamiento", "imagen", "comentarios"],
     })
   }
 
