@@ -15,6 +15,11 @@ module.exports = {
           id_tipo_alojamiento: 2,
           id_usuario: 2,
         },
+        {
+          direccion: "Calle 3",
+          id_tipo_alojamiento: 3,
+          id_usuario: 3,
+        },
       ],
       {}
     )
