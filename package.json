@@ -25,6 +25,7 @@
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
     "db:start:prod": "cross-env NODE_ENV=production \"npx sequelize-cli db:create npx && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all\"",
     "db:start:prod2": "cross-env NODE_ENV=production npm run db:start",
+    "prod": "cross-env NODE_ENV=production nodemon -r dotenv/config app.js",
     "start": "node app.js"
   },
   "repository": {
