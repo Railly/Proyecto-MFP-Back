@@ -31,5 +31,11 @@ module.exports = {
     database: DB_DATABASE_PROD,
     host: DB_HOST_PROD,
     dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
 }
