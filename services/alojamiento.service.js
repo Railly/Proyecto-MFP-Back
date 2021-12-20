@@ -42,7 +42,18 @@ class AccommodationService {
         "tipo_alojamiento",
         {
           association: "anuncio",
-          include: ["imagen"],
+          include: [
+            "imagen",
+            {
+              association: "comentarios",
+              include: [
+                {
+                  association: "usuario",
+                  attributes: ["id", "nombre", "apellidos"],
+                },
+              ],
+            },
+          ],
         },
       ],
     })

@@ -11,7 +11,11 @@ router.post(
   validatorHandler(createCommentarySchema, BODY),
   validateJWT,
   async (req, res) => {
-    const commentary = await CommentariesService.create(req.body)
+    const { id } = req.user
+    const commentary = await CommentariesService.create({
+      id_usuario: id,
+      ...req.body,
+    })
 
     if (!commentary) {
       return res.status(400).send({

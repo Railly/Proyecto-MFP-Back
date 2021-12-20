@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id_usuario",
         otherKey: "id_anuncio",
       })
+
+      this.hasMany(models.H_Comentarios, {
+        as: "usuario2",
+        foreignKey: "id_usuario",
+      })
     }
   }
   Usuario.init(

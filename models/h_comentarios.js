@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         as: "anuncio",
         foreignKey: "id_anuncio",
       })
+
+      this.belongsTo(models.H_Usuarios, {
+        as: "usuario",
+        foreignKey: "id_usuario",
+      })
     }
   }
   H_Comentarios.init(
