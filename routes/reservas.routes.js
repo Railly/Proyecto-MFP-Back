@@ -32,6 +32,7 @@ router.post(
 )
 
 router.get("/", validateJWT, async (req, res) => {
+  console.log(req.user)
   const { id } = req.user
   const reservation = await ReservationService.getByUser(id)
 

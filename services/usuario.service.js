@@ -47,6 +47,7 @@ class UserService {
 
   async updateAccount(id, data) {
     const user = await this.findOne(id)
+    console.log(user)
     return user.update(data)
   }
 

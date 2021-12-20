@@ -64,14 +64,21 @@ router.put(
   validatorHandler(getUserSchema, PARAMS),
   validatorHandler(updateUserSchema, BODY),
   async (req, res) => {
+    let user = null
     try {
-      const { contraseña } = req.body
-      const saltRounds = 10
-      const contraseñaHash = await bcrypt.hash(contraseña, saltRounds)
-      const user = await UserService.updateAccount(req.params.id, {
-        ...req.body,
-        contraseña: contraseñaHash,
-      })
+      if (req.body.contraseña) {
+        console.log("entra")
+        const saltRounds = 10
+        const contraseñaHash = await bcrypt.hash(
+          req.body.contraseña,
+          saltRounds
+        )
+        user = await UserService.updateAccount(req.params.id, {
+          contraseña: contraseñaHash,
+        })
+      } else {
+        user = await UserService.updateAccount(req.params.id, req.body)
+      }
       res.status(200).json({
         message: "El usuario se ha actualizado correctamente!",
         data: {
