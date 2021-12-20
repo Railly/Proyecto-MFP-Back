@@ -1,11 +1,11 @@
 require("dotenv").config()
 
-const { DB_HOST, DB_USERNAME, DB_PASSWORD, POSTGRES_URL } = process.env
+const { DB_HOST, DB_USERNAME, DB_PASSWORD, DATABASE_URL } = process.env
 
-const DB_USERNAME_PROD = POSTGRES_URL.split("//")[1].split(":")[0]
-const DB_PASSWORD_PROD = POSTGRES_URL.split("//")[1].split(":")[1].split("@")[0]
-const DB_DATABASE_PROD = POSTGRES_URL.split("//")[1].split("@")[1].split("/")[1]
-const DB_HOST_PROD = POSTGRES_URL.split("//")[1]
+const DB_USERNAME_PROD = DATABASE_URL.split("//")[1].split(":")[0]
+const DB_PASSWORD_PROD = DATABASE_URL.split("//")[1].split(":")[1].split("@")[0]
+const DB_DATABASE_PROD = DATABASE_URL.split("//")[1].split("@")[1].split("/")[1]
+const DB_HOST_PROD = DATABASE_URL.split("//")[1]
   .split("@")[1]
   .split("/")[0]
   .split(":")[0]
