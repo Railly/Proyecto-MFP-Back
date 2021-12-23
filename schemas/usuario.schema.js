@@ -5,6 +5,7 @@ const nombre = joi.string().min(3).max(100)
 const apellidos = joi.string().min(3).max(45)
 const correo = joi.string().email()
 const contraseña = joi.string().min(8).max(45)
+const telefono = joi.string().length(9)
 
 // Optional fields
 const fechaNacimiento = joi.date()
@@ -19,6 +20,7 @@ const createUserSchema = joi.object({
   apellidos: apellidos.required(),
   correo: correo.required(),
   contraseña: contraseña.required(),
+  telefono: telefono.required(),
 })
 
 const updateUserSchema = joi.object({

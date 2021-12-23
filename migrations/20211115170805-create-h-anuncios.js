@@ -23,8 +23,8 @@ module.exports = {
           model: "H_Alojamientos",
           key: "id",
         },
-        onUpdate: "cascade",
-        onDelete: "cascade",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,

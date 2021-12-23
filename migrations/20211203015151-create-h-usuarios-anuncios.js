@@ -14,8 +14,8 @@ module.exports = {
           model: "H_Usuarios",
           key: "id",
         },
-        onUpdate: "cascade",
-        onDelete: "cascade",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       id_anuncio: {
         type: Sequelize.INTEGER,
@@ -23,8 +23,8 @@ module.exports = {
           model: "H_Anuncios",
           key: "id",
         },
-        onUpdate: "cascade",
-        onDelete: "cascade",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
     })
   },

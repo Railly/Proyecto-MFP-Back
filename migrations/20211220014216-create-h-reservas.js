@@ -29,8 +29,8 @@ module.exports = {
           model: "H_Alojamientos",
           key: "id",
         },
-        onUpdate: "cascade",
-        onDelete: "set null",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       id_usuario: {
         type: Sequelize.INTEGER,
@@ -38,8 +38,8 @@ module.exports = {
           model: "H_Usuarios",
           key: "id",
         },
-        onUpdate: "cascade",
-        onDelete: "set null",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,
