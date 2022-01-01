@@ -31,19 +31,24 @@ router.post(
   }
 )
 
-router.get("/", validateJWT, async (req, res) => {
+router.get("/realizadas", validateJWT, async (req, res) => {
   console.log(req.user)
   const { id } = req.user
   const reservation = await ReservationService.getByUser(id)
 
-  if (!reservation) {
-    return res.status(400).send({
-      error: "Error al obtener las imagenes",
-    })
-  }
+  res.status(200).send({
+    data: reservation || [],
+    message: "Reservas obtenidas con éxito",
+    ok: true,
+  })
+})
+
+router.get("/recibidas", validateJWT, async (req, res) => {
+  const { id } = req.user
+  const reservation = await ReservationService.getByUserReceived(id)
 
   res.status(200).send({
-    data: reservation,
+    data: reservation || [],
     message: "Reservas obtenidas con éxito",
     ok: true,
   })
