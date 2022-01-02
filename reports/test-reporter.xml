@@ -1,76 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\imagenes_anuncio.routes.test.js">
-  </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\models\index.test.js">
-    <testCase name="index.js" duration="290"/>
+    <testCase name="index.js" duration="253"/>
   </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\services\alojamiento.service.test.js">
-    <testCase name="create" duration="259"/>
-    <testCase name="getById" duration="37"/>
-    <testCase name="getAll" duration="8"/>
-  </file>
-  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\anuncio.routes.test.js">
-    <testCase name="Anuncio Routes Post route /anuncio with status 200" duration="30"/>
-    <testCase name="Anuncio Routes Get route /anuncio with status 200" duration="26"/>
-    <testCase name="Anuncio Routes Get route /anuncio/:id with status 200" duration="12"/>
-  </file>
-  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\caracteristicas.routes.test.js">
-    <testCase name="Caracteristicas Routes Post route /caracteristicas with status 200" duration="16"/>
+    <testCase name="create" duration="202"/>
+    <testCase name="getById" duration="35"/>
+    <testCase name="getAll" duration="6"/>
   </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\tipo_alojamiento.routes.test.js">
-    <testCase name="Tipo alojamiento Routes Get route /tipo_alojamiento with status 200" duration="19"/>
+    <testCase name="Tipo alojamiento Routes Get route /tipo_alojamiento with status 200" duration="14"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\imagenes_anuncio.routes.test.js">
+    <testCase name="Imagenes_anuncio Routes Post route /imagenes_anuncio with status 200" duration="23"/>
+    <testCase name="Imagenes_anuncio Routes Get route /imagenes_anuncio with status 200" duration="9"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\anuncio.routes.test.js">
+    <testCase name="Anuncio Routes Post route /anuncio with status 200" duration="24"/>
+    <testCase name="Anuncio Routes Get route /anuncio with status 200" duration="19"/>
+    <testCase name="Anuncio Routes Get route /anuncio/:id with status 200" duration="14"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\comentarios.routes.test.js">
+    <testCase name="Comentarios Routes Post route /comentarios with status 200" duration="25"/>
   </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\favoritos.routes.test.js">
-    <testCase name="Favoritos Routes Get route /favoritos with status 200" duration="37"/>
-    <testCase name="Favoritos Routes Post rout /favoritos with status 200" duration="42"/>
-    <testCase name="Favoritos Routes Get one route /favoritos/:id with status 200" duration="9"/>
-    <testCase name="Favoritos Routes Get one route /favoritos/:id with status 404" duration="11"/>
-    <testCase name="Favoritos Routes Delete route /favoritos with status 200" duration="9"/>
+    <testCase name="Favoritos Routes Get route /favoritos with status 200" duration="30"/>
+    <testCase name="Favoritos Routes Post rout /favoritos with status 200" duration="16"/>
+    <testCase name="Favoritos Routes Get one route /favoritos/:id with status 200" duration="7"/>
+    <testCase name="Favoritos Routes Get one route /favoritos/:id with status 404" duration="7"/>
+    <testCase name="Favoritos Routes Delete route /favoritos with status 200" duration="12"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\reservas.routes.test.js">
+    <testCase name="Reservas Routes Post route /reservas with status 200" duration="36"/>
+    <testCase name="Reservas Routes Get route /reservas/realizadas with status 200" duration="28"/>
+    <testCase name="Reservas Routes Get route /reservas/recibidas with status 200" duration="11"/>
+  </file>
+  <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\caracteristicas.routes.test.js">
+    <testCase name="Caracteristicas Routes Post route /caracteristicas with status 200" duration="14"/>
   </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\usuario.routes.test.js">
-    <testCase name="User Routes Post route /login with status 200" duration="440"/>
-    <testCase name="User Routes Post route /login with status 404" duration="96"/>
-    <testCase name="User Routes Post rout /registro with status 200" duration="27">
-      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: 200
-Received: 500
-    at Object.<anonymous> (C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\usuario.routes.test.js:31:24)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
-    <testCase name="User Routes Post rout /registro with status 404" duration="10">
-      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: 404
-Received: 500
-    at Object.<anonymous> (C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\usuario.routes.test.js:41:24)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
-    <testCase name="User Routes Put rout /usuarios/:id with status 200" duration="105">
-      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: 200
-Received: 404
-    at Object.<anonymous> (C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\usuario.routes.test.js:49:24)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
-    <testCase name="User Routes Put rout /usuarios/:id with status 404" duration="87"/>
-    <testCase name="User Routes Delete rout /usuarios/:id with status 200" duration="8">
-      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: 200
-Received: 404
-    at Object.<anonymous> (C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\usuario.routes.test.js:63:24)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
-    <testCase name="User Routes Delete rout /usuarios/:id with status 404" duration="8"/>
+    <testCase name="User Routes Post route /login with status 200" duration="643"/>
+    <testCase name="User Routes Post route /login with status 404" duration="72"/>
+    <testCase name="User Routes Post route /login with status 404" duration="7"/>
+    <testCase name="User Routes Post rout /registro with status 200" duration="82"/>
+    <testCase name="User Routes Post rout /registro with status 404" duration="80"/>
+    <testCase name="User Routes Put rout /usuarios/:id with status 200" duration="85"/>
+    <testCase name="User Routes Put rout /usuarios/:id with status 200" duration="7"/>
+    <testCase name="User Routes Put rout /usuarios/:id with status 404" duration="63"/>
+    <testCase name="User Routes Delete rout /usuarios/:id with status 200" duration="12"/>
+    <testCase name="User Routes Delete rout /usuarios/:id with status 404" duration="5"/>
   </file>
   <file path="C:\workspace\unmsm\CICLO-VII\MFP\Proyecto-MFP-Back\__tests__\routes\alojamiento.routes.test.js">
-    <testCase name="Alojamiento Routes Get route /alojamiento with status 200" duration="37"/>
-    <testCase name="Alojamiento Routes Get route /alojamiento/:id with status 200" duration="30"/>
-    <testCase name="Alojamiento Routes Post route /alojamiento with status 200" duration="1572"/>
-    <testCase name="Put route /alojamiento with status 200" duration="1003"/>
-    <testCase name="Delete route /alojamiento with status 200" duration="12"/>
+    <testCase name="Alojamiento Routes Get route /alojamiento with status 200" duration="31"/>
+    <testCase name="Alojamiento Routes Get route /alojamiento/:id with status 200" duration="18"/>
+    <testCase name="Alojamiento Routes Post route /alojamiento with status 200" duration="1208"/>
+    <testCase name="Put route /alojamiento with status 200" duration="975"/>
+    <testCase name="Delete route /alojamiento with status 200" duration="9"/>
   </file>
 </testExecutions>

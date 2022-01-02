@@ -4,7 +4,7 @@ const app = new Server().app
 
 let token = null
 
-describe("Imagenes_anuncio Routes", () => {
+describe("Comentarios Routes", () => {
   beforeAll((done) => {
     request(app)
       .post("/api/usuarios/login")
@@ -18,21 +18,16 @@ describe("Imagenes_anuncio Routes", () => {
       })
   })
 
-  it("Post route /imagenes_anuncio with status 200", async () => {
-    const response = await request(app)
-      .post("/api/imagenes_anuncio")
+  it("Post route /comentarios with status 200", async () => {
+    const res = await request(app)
+      .post("/api/comentarios")
       .set("Authorization", `Bearer ${token}`)
       .send({
-        imagen: "https://i.imgur.com/w0YzZ6c.jpg",
         id_anuncio: 1,
+        contenido: "Hola",
+        calificacion: 5,
       })
-      .expect(200)
-  })
 
-  it("Get route /imagenes_anuncio with status 200", async () => {
-    const response = await request(app)
-      .get("/api/imagenes_anuncio")
-      .set("Authorization", `Bearer ${token}`)
-      .expect(200)
+    expect(res.status).toBe(201)
   })
 })

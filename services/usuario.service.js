@@ -17,12 +17,16 @@ class UserService {
       },
     })
 
-    const passwordIsValid =
-      user === null
-        ? false
-        : await bcrypt.compare(data.contraseña, user.contraseña)
+    if (!user) {
+      throw boom.unauthorized("Usuario o contraseña incorrectos")
+    }
 
-    if (!user || !passwordIsValid) {
+    const isPasswordValid = await bcrypt.compare(
+      data.contraseña,
+      user.contraseña
+    )
+
+    if (!isPasswordValid) {
       throw boom.notFound("Ususario o contraseña incorrectos")
     }
 

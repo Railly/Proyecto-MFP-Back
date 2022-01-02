@@ -9,7 +9,7 @@ class ReservationService {
   }
 
   async getByUser(userId) {
-    const res = User.findByPk(userId, {
+    return User.findByPk(userId, {
       include: [
         {
           association: "reservas",
@@ -23,17 +23,15 @@ class ReservationService {
         },
       ],
     })
-    return res
   }
 
   async getByUserReceived(userId) {
-    const res = Accommodation.findAll({
+    return Accommodation.findAll({
       where: {
         id_usuario: userId,
       },
       include: ["reserva", "anuncio", "usuario"],
     })
-    return res
   }
 }
 

@@ -21,12 +21,22 @@ describe("User Routes", () => {
     expect(res.body.token).toBeUndefined()
   })
 
+  it("Post route /login with status 404", async () => {
+    const res = await request(app).post("/api/usuarios/login").send({
+      correo: "raillyhugo2022@gmail.com",
+      contraseña: "Contra1234",
+    })
+    expect(res.status).toBe(404)
+    expect(res.body.token).toBeUndefined()
+  })
+
   it("Post rout /registro with status 200", async () => {
     const res = await request(app).post("/api/usuarios/registro").send({
-      correo: "raillyhugo2@gmail.com",
-      contraseña: "Contra123",
       nombre: "Railly2",
       apellidos: "Hugo2",
+      correo: "raillyhugo2@gmail.com",
+      contraseña: "Contra123",
+      telefono: "987654321",
     })
     expect(res.status).toBe(200)
     expect(res.body.data).toBeDefined()
@@ -37,6 +47,7 @@ describe("User Routes", () => {
       contraseña: "Contra123",
       nombre: "Railly2",
       apellidos: "Hugo2",
+      telefono: "987654321",
     })
     expect(res.status).toBe(404)
     expect(res.body.data).toBeUndefined()
@@ -45,6 +56,14 @@ describe("User Routes", () => {
   it("Put rout /usuarios/:id with status 200", async () => {
     const res = await request(app).put("/api/usuarios/4").send({
       contraseña: "Contra123456",
+    })
+    expect(res.status).toBe(200)
+    expect(res.body.data).toBeDefined()
+  })
+
+  it("Put rout /usuarios/:id with status 200", async () => {
+    const res = await request(app).put("/api/usuarios/4").send({
+      nombre: "Railly2",
     })
     expect(res.status).toBe(200)
     expect(res.body.data).toBeDefined()

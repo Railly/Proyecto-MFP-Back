@@ -66,3 +66,60 @@ router.delete("/", validateJWT, async (req, res) => {
 })
 
 module.exports = router
+
+// Generatio large documentation for this file
+
+/**
+ * @swagger
+ * /api/v1/alojamientos:
+ *  post:
+ *     tags:
+ *       - Alojamientos
+ *     description: Crea un alojamiento
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: alojamiento
+ *         description: alojamiento que se va a crear
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Alojamiento'
+ *     responses:
+ *       200:
+ *         description: alojamiento creado exitosamente
+ *         schema:
+ *           $ref: '#/definitions/Alojamiento'
+ *       400:
+ *         description: Error al crear el alojamiento
+ *         schema:
+ *           $ref: '#/definitions/Error'
+ *       401:
+ *         description: No autorizado
+ *         schema:
+ *           $ref: '#/definitions/Error'
+ */
+
+/**
+ * @swagger
+ * /api/v1/alojamientos:
+ *   get:
+ *     tags:
+ *       - Alojamientos
+ *     description: Obtiene todos los alojamientos
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: alojamientos obtenidos exitosamente
+ *         schema:
+ *           $ref: '#/definitions/Alojamiento'
+ *       400:
+ *         description: Error al obtener los alojamientos
+ *         schema:
+ *           $ref: '#/definitions/Error'
+ *       401:
+ *         description: No autorizado
+ *         schema:
+ *           $ref: '#/definitions/Error'
+ */

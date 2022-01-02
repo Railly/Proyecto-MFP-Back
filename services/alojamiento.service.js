@@ -1,4 +1,3 @@
-const boom = require("@hapi/boom")
 const db = require("../models")
 const Accommodation = db.H_Alojamientos
 
@@ -22,9 +21,6 @@ class AccommodationService {
 
   async delete(id) {
     const accommodation = await Accommodation.findByPk(id)
-    if (!accommodation) {
-      throw boom.notFound("Accommodation not found")
-    }
     return accommodation.destroy()
   }
 
@@ -61,9 +57,6 @@ class AccommodationService {
 
   async update(id, accommodation) {
     const accommodationToUpdate = await Accommodation.findByPk(id)
-    if (!accommodationToUpdate) {
-      throw boom.notFound("Accommodation not found")
-    }
     return accommodationToUpdate.update(accommodation)
   }
 }

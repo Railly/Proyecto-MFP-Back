@@ -19,7 +19,11 @@ class Server {
 
   middleware() {
     this.app.use(express.json())
-    this.app.use(cors())
+    this.app.use(
+      cors({
+        origin: ["http://localhost:3000", "https://homy123.herokuapp.com"],
+      })
+    )
     this.app.use(express.urlencoded({ extended: false }))
     this.app.use(
       fileUpload({
@@ -44,3 +48,14 @@ class Server {
 }
 
 module.exports = Server
+
+// describe the server clase and methods
+
+// @returns {void}
+// @param {void}
+// @description
+// @class Server
+// @method middleware
+// @method routes
+// @method listen
+// @method constructor
