@@ -13,7 +13,13 @@ class ReservationService {
       include: [
         {
           association: "reservas",
-          include: ["alojamiento", "usuario"],
+          include: [
+            {
+              association: "alojamiento",
+              include: ["anuncio"],
+            },
+            "usuario",
+          ],
         },
       ],
     })
