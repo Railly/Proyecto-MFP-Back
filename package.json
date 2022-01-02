@@ -20,7 +20,7 @@
     "db:start": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "lint": "eslint",
     "sonarqube": "sonar-scanner",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --env=node",
     "pretest": "cross-env NODE_ENV=test npm run db:reset",
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
     "db:start:prod": "cross-env NODE_ENV=production npm run db:start",

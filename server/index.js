@@ -22,6 +22,9 @@ class Server {
     const allowedOrigins = [
       "https://proyecto-mfp-front.vercel.app",
       "http://localhost:3000",
+      "http://localhost:3001",
+      // for testing
+      undefined,
     ]
     this.app.use(
       cors({
