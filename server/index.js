@@ -21,7 +21,10 @@ class Server {
     this.app.use(express.json())
     this.app.use(
       cors({
-        origin: ["http://localhost:3000", "https://homy123.herokuapp.com"],
+        origin: [
+          "http://localhost:3000",
+          "https://proyecto-mfp-front.vercel.app/",
+        ],
       })
     )
     this.app.use(express.urlencoded({ extended: false }))
