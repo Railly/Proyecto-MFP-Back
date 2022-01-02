@@ -19,12 +19,19 @@ class Server {
 
   middleware() {
     this.app.use(express.json())
+    const allowedOrigins = [
+      "https://proyecto-mfp-front.vercel.app",
+      "http://localhost:3000",
+    ]
     this.app.use(
       cors({
-        origin: [
-          "http://localhost:3000",
-          "https://proyecto-mfp-front.vercel.app/",
-        ],
+        origin: (origin, callback) => {
+          if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true)
+          } else {
+            callback(new Error("Not allowed by CORS"))
+          }
+        },
       })
     )
     this.app.use(express.urlencoded({ extended: false }))
